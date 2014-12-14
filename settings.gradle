@@ -1,1 +1,1 @@
-include ':app', ':ventanatimer', ':preferencias'
+include ':app', ':ventanatimer', ':preferencias', ':canciones'

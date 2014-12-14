@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, AudioVideoAudioManagerActivity!</string>
+    <string name="app_name">AudioVideoAudioManager</string>
+    <string name="down_string">Bajar</string>
+    <string name="up_string">Subir</string>
+    <string name="play_string">Play</string>
+    <string name="action_settings">Settings</string>
+</resources>
