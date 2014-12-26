@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DAMProjects.iml" filepath="$PROJECT_DIR$/DAMProjects.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/canciones/canciones.iml" filepath="$PROJECT_DIR$/canciones/canciones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cancionesmediaplayer/cancionesmediaplayer.iml" filepath="$PROJECT_DIR$/cancionesmediaplayer/cancionesmediaplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/preferencias/preferencias.iml" filepath="$PROJECT_DIR$/preferencias/preferencias.iml" />
       <module fileurl="file://$PROJECT_DIR$/ventanatimer/ventanatimer.iml" filepath="$PROJECT_DIR$/ventanatimer/ventanatimer.iml" />
     </modules>
