@@ -1,1 +1,1 @@
-include ':app', ':ventanatimer', ':preferencias', ':canciones', ':cancionesmediaplayer'
+include ':app', ':ventanatimer', ':preferencias', ':canciones', ':cancionesmediaplayer', ':cargabarra', ':camara', ':datos'
