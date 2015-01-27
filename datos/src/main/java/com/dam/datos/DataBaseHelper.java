@@ -3,6 +3,7 @@ package com.dam.datos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -27,6 +28,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     final private static Integer VERSION = 1;
     final private Context mContext;
+
+
+    //Modos edicion
+    public static final String C_MODO  = "modo" ;
+    public static final int C_VISUALIZAR = 551 ;
 
     //Constructor
     public DataBaseHelper(Context context) {
@@ -72,5 +78,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.query(TABLE_NAME,
                 columns, null, new String[] {}, null, null,
                 null);
+    }
+
+    /**
+     * Devuelve cursor con todos las columnas del registro
+     */
+    public Cursor getRegistro(long id) throws SQLException
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor c = db.query( true, TABLE_NAME, columns, ID + "=" + id, null, null, null, null, null);
+
+        //Nos movemos al primer registro de la consulta
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
     }
 }

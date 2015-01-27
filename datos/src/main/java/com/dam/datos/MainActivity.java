@@ -3,6 +3,7 @@ package com.dam.datos;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
@@ -22,6 +24,9 @@ public class MainActivity extends ListActivity {
     private SimpleCursorAdapter mAdapter;
 
     private static final String TAG = "Datos";
+
+    public static final String C_MODO  = "modo" ;
+    public static final int C_VISUALIZAR = 551 ;
 
 
     @Override
@@ -68,5 +73,18 @@ public class MainActivity extends ListActivity {
         mDbHelper.deleteDatabase();
         super.onDestroy();
 
+    }
+
+    //Visualizar un dato en Formulario
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id)
+    {
+        super.onListItemClick(l, v, position, id);
+        // Llamamos a la Actividad Formulario indicando el modo visualización y el identificador del registro
+        Intent i = new Intent(MainActivity.this, Forumlario.class);
+        i.putExtra(C_MODO, C_VISUALIZAR);
+        i.putExtra(mDbHelper.ID, id);
+
+        startActivityForResult(i, C_VISUALIZAR);
     }
 }
