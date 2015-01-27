@@ -9,12 +9,5 @@
         android:layout_height="wrap_content"
         android:id="@android:id/list"/>
 
-    <Button
-        android:id="@+id/fix_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fix_string"
-        android:layout_alignParentBottom="true"
-        android:textSize="24sp"/>
 
 </RelativeLayout>
