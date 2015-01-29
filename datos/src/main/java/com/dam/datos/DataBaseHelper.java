@@ -33,6 +33,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //Modos edicion
     public static final String C_MODO  = "modo" ;
     public static final int C_VISUALIZAR = 551 ;
+    public static final int C_CREAR = 552 ;
+    public static final int C_EDITAR = 553 ;
 
     //Constructor
     public DataBaseHelper(Context context) {
@@ -93,5 +95,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             c.moveToFirst();
         }
         return c;
+    }
+
+    /**
+     * Inserta los valores en un registro de la tabla
+     */
+    public long insert(ContentValues reg)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.insert(TABLE_NAME, null, reg);
     }
 }

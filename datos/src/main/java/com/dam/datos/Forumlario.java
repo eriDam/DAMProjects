@@ -1,6 +1,7 @@
 package com.dam.datos;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,9 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Forumlario extends Activity {
@@ -27,6 +30,10 @@ public class Forumlario extends Activity {
     // Modo del formulario
     //
     private int modo ;
+
+    //Botones
+    private Button boton_guardar;
+    private Button boton_cancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +64,35 @@ public class Forumlario extends Activity {
             id = extra.getLong(DataBaseHelper.ID);
             consultar(id);
         }
+        //Botones de guardado y cancelar
+        boton_guardar = (Button) findViewById(R.id.boton_guardar);
+        boton_cancelar = (Button) findViewById(R.id.boton_cancelar);
 
         //
         // Establecemos el modo del formulario
         //
         establecerModo(extra.getInt(mDbHelper.C_MODO));
+
+        //
+        // Definimos las acciones para los dos botones
+        //
+        boton_guardar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {
+                guardar();
+            }
+        });
+
+        boton_cancelar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v)
+            {
+                cancelar();
+            }
+        });
     }
 
     private void consultar(long id)
@@ -81,7 +112,39 @@ public class Forumlario extends Activity {
         if (modo == mDbHelper.C_VISUALIZAR)
         {
             this.nombre.setEnabled(false);
+            this.boton_guardar.setEnabled(false);
+        }else if (modo == mDbHelper.C_CREAR)
+        {
+            this.setTitle(R.string.hipoteca_crear_titulo);
+            this.nombre.setEnabled(true);
+            this.boton_guardar.setEnabled(true);
         }
+    }
+    private void guardar()
+    {
+        //
+        // Obtenemos los datos del formulario
+        //
+        ContentValues reg = new ContentValues();
+
+        reg.put(mDbHelper.ARTIST_NAME, nombre.getText().toString());
+
+        if (modo == mDbHelper.C_CREAR)
+        {
+            mDbHelper.insert(reg);
+            Toast.makeText(Forumlario.this, "Artista creado", Toast.LENGTH_SHORT).show();
+        }
+
+        //
+        // Devolvemos el control
+        //
+        setResult(RESULT_OK);
+        finish();
+    }
+    private void cancelar()
+    {
+        setResult(RESULT_CANCELED, null);
+        finish();
     }
 
     @Override

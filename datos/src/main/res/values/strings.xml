@@ -8,5 +8,9 @@
     <string name="title_activity_forumlario">Forumlario</string>
     <string name="label_id">Id: </string>
     <string name="label_nombre_artista">Cantante</string>
+    <string name="crear">Nuevo artista</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+    <string name="hipoteca_crear_titulo">Añadir artista</string>
 
 </resources>
