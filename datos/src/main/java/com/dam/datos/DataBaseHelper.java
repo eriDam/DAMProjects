@@ -105,4 +105,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         return db.insert(TABLE_NAME, null, reg);
     }
+    /**
+     * Inserta los valores en un registro de la tabla
+     */
+    public long update(ContentValues reg)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        if (reg.containsKey(ID))
+        {
+            //
+            // Obtenemos el id y lo borramos de los valores
+            //
+            long id = reg.getAsLong(ID);
+
+            reg.remove(ID);
+
+            //
+            // Actualizamos el registro con el identificador que hemos extraido
+            //
+            return db.update(TABLE_NAME, reg, "_id=" + id, null);
+        }
+        return db.insert(TABLE_NAME, null, reg);
+    }
 }

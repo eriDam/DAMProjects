@@ -113,8 +113,7 @@ public class Forumlario extends Activity {
         {
             this.nombre.setEnabled(false);
             this.boton_guardar.setEnabled(false);
-        }else if (modo == mDbHelper.C_CREAR)
-        {
+        }else if ((modo == mDbHelper.C_CREAR)||(modo == mDbHelper.C_EDITAR)){
             this.setTitle(R.string.hipoteca_crear_titulo);
             this.nombre.setEnabled(true);
             this.boton_guardar.setEnabled(true);
@@ -126,13 +125,16 @@ public class Forumlario extends Activity {
         // Obtenemos los datos del formulario
         //
         ContentValues reg = new ContentValues();
-
+        if (modo == mDbHelper.C_EDITAR) reg.put(mDbHelper.ID, id);
         reg.put(mDbHelper.ARTIST_NAME, nombre.getText().toString());
 
         if (modo == mDbHelper.C_CREAR)
         {
             mDbHelper.insert(reg);
             Toast.makeText(Forumlario.this, "Artista creado", Toast.LENGTH_SHORT).show();
+        }   else if (modo == mDbHelper.C_EDITAR){
+            Toast.makeText(Forumlario.this, "Artista modificado", Toast.LENGTH_SHORT).show();
+            mDbHelper.update(reg);
         }
 
         //

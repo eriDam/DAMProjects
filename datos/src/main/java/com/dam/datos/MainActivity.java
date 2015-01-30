@@ -70,8 +70,23 @@ public class MainActivity extends ListActivity {
         LinearLayout vwParentRow = (LinearLayout)v.getParent();
         TextView id =(TextView) vwParentRow.findViewById(R.id._id);
         Intent i = new Intent(MainActivity.this, Forumlario.class);
+
+        i.putExtra(C_MODO, C_EDITAR);
+        i.putExtra(mDbHelper.ID, Long.valueOf((String)id.getText()));
+
+
+        this.startActivityForResult(i, C_EDITAR);
+    }
+
+    public void viewHandler(View v) {
+        //get the row the clicked button is in
+        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+        TextView id =(TextView) vwParentRow.findViewById(R.id._id);
+        Intent i = new Intent(MainActivity.this, Forumlario.class);
+
         i.putExtra(C_MODO, C_VISUALIZAR);
-        i.putExtra(mDbHelper.ID, id.getText());
+        i.putExtra(mDbHelper.ID, Long.valueOf((String)id.getText()));
+
 
         this.startActivityForResult(i, C_VISUALIZAR);
     }
@@ -130,7 +145,13 @@ public class MainActivity extends ListActivity {
                     c=mDbHelper.readArtistas(db);
                     mAdapter.changeCursor(c);
                     mAdapter.notifyDataSetChanged();
-
+            case C_EDITAR:
+                if (resultCode == RESULT_OK)
+                    //Leemos la base de datos y mostramos la informacion
+                    c=mAdapter.getCursor();
+                    c=mDbHelper.readArtistas(db);
+                    mAdapter.changeCursor(c);
+                    mAdapter.notifyDataSetChanged();
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
